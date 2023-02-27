@@ -1,4 +1,4 @@
-package com.zuhabul.docscan.crop
+package org.cracktech.docscan.crop
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -6,12 +6,12 @@ import android.graphics.Matrix
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.zuhabul.docscan.EdgeDetectionHandler
-import com.zuhabul.docscan.SourceManager
-import com.zuhabul.docscan.processor.Corners
-import com.zuhabul.docscan.processor.TAG
-import com.zuhabul.docscan.processor.cropPicture
-import com.zuhabul.docscan.processor.enhancePicture
+import org.cracktech.docscan.EdgeDetectionHandler
+import org.cracktech.docscan.SourceManager
+import org.cracktech.docscan.processor.Corners
+import org.cracktech.docscan.processor.TAG
+import org.cracktech.docscan.processor.cropPicture
+import org.cracktech.docscan.processor.enhancePicture
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

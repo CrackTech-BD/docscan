@@ -1,4 +1,4 @@
-package com.zuhabul.docscan.processor
+package org.cracktech.docscan.processor
 
 import org.opencv.core.Point
 import org.opencv.core.Size

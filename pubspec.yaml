@@ -1,8 +1,8 @@
 name: docscan
 description: A flutter plugin to detect edges of objects, scan paper, detect corner, detect rectangle. It allows cropping of the detected object image and returns the path of the cropped image.
 version: 1.0.0
-homepage: https://zuhabul.com
-repository: https://github.com/zuhabul/docscan
+homepage: https://cracktech.org
+repository: https://github.com/CrackTech-BD/docscan
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -31,7 +31,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.zuhabul.docscan
+        package: org.cracktech.docscan
         pluginClass: DocScanPlugin
       ios:
         pluginClass: DocScanPlugin

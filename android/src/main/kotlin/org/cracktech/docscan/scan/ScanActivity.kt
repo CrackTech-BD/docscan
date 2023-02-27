@@ -1,4 +1,4 @@
-package com.zuhabul.docscan.scan
+package org.cracktech.docscan.scan
 
 import android.app.Activity
 import android.content.Intent
@@ -12,11 +12,11 @@ import android.util.Log
 import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
-import com.zuhabul.docscan.EdgeDetectionHandler
-import com.zuhabul.docscan.R
-import com.zuhabul.docscan.REQUEST_CODE
-import com.zuhabul.docscan.base.BaseActivity
-import com.zuhabul.docscan.view.PaperRectangle
+import org.cracktech.docscan.EdgeDetectionHandler
+import org.cracktech.docscan.R
+import org.cracktech.docscan.REQUEST_CODE
+import org.cracktech.docscan.base.BaseActivity
+import org.cracktech.docscan.view.PaperRectangle
 import kotlinx.android.synthetic.main.activity_scan.*
 import org.opencv.android.OpenCVLoader
 import org.opencv.core.Core

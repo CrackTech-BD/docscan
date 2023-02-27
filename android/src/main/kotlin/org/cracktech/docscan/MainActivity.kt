@@ -1,4 +1,4 @@
-package com.zuhabul.docscan
+package org.cracktech.docscan
 
 
 import android.os.Bundle

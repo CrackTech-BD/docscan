@@ -1,4 +1,4 @@
-package com.zuhabul.docscan.crop
+package org.cracktech.docscan.crop
 
 import android.app.Activity
 import android.os.Bundle
@@ -7,10 +7,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
-import com.zuhabul.docscan.EdgeDetectionHandler
-import com.zuhabul.docscan.R
-import com.zuhabul.docscan.base.BaseActivity
-import com.zuhabul.docscan.view.PaperRectangle
+import org.cracktech.docscan.EdgeDetectionHandler
+import org.cracktech.docscan.R
+import org.cracktech.docscan.base.BaseActivity
+import org.cracktech.docscan.view.PaperRectangle
 import kotlinx.android.synthetic.main.activity_crop.*
 
 

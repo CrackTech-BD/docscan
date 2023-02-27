@@ -112,8 +112,12 @@ This plugin is based on the work of the following projects: edge_detection, cunn
 
 ### Author
 
-[Md Zuhabul Islam](https://zuhabul.com)
+[Md Zuhabul Islam](https:/github.com/zuhabul)
 
 ### Maintainer
 
 [Hridoy](https://github.com/hr1d0y)
+
+### Publisher
+
+[CrackTech Limited](https://cracktech.org)

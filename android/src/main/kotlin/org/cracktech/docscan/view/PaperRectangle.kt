@@ -1,4 +1,4 @@
-package com.zuhabul.docscan.view
+package org.cracktech.docscan.view
 
 import android.content.Context
 import android.graphics.*
@@ -6,8 +6,8 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import com.zuhabul.docscan.processor.Corners
-import com.zuhabul.docscan.processor.TAG
+import org.cracktech.docscan.processor.Corners
+import org.cracktech.docscan.processor.TAG
 import org.opencv.core.Point
 import org.opencv.core.Size
 import kotlin.math.abs

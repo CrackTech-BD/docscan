@@ -1,4 +1,4 @@
-package com.zuhabul.docscan.base
+package org.cracktech.docscan.base
 
 import android.os.Build
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.zuhabul.docscan.R
+import org.cracktech.docscan.R
 
 abstract class BaseActivity : AppCompatActivity() {
 

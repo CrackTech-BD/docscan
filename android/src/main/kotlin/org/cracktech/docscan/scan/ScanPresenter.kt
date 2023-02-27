@@ -1,4 +1,4 @@
-package com.zuhabul.docscan.scan
+package org.cracktech.docscan.scan
 
 import android.app.Activity
 import android.content.Context
@@ -19,12 +19,12 @@ import android.util.Log
 import android.view.Display
 import android.view.SurfaceHolder
 import android.widget.Toast
-import com.zuhabul.docscan.EdgeDetectionHandler
-import com.zuhabul.docscan.REQUEST_CODE
-import com.zuhabul.docscan.SourceManager
-import com.zuhabul.docscan.crop.CropActivity
-import com.zuhabul.docscan.processor.Corners
-import com.zuhabul.docscan.processor.processPicture
+import org.cracktech.docscan.EdgeDetectionHandler
+import org.cracktech.docscan.REQUEST_CODE
+import org.cracktech.docscan.SourceManager
+import org.cracktech.docscan.crop.CropActivity
+import org.cracktech.docscan.processor.Corners
+import org.cracktech.docscan.processor.processPicture
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers

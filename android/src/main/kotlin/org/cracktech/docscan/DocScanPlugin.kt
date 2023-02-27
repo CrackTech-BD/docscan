@@ -1,9 +1,9 @@
-package com.zuhabul.docscan
+package org.cracktech.docscan
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import com.zuhabul.docscan.scan.ScanActivity
+import org.cracktech.docscan.scan.ScanActivity
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterPluginBinding
 import io.flutter.embedding.engine.plugins.activity.ActivityAware

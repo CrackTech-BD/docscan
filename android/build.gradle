@@ -1,4 +1,4 @@
-group 'com.zuhabul.docscan'
+group 'org.cracktech.docscan'
 version '1.0-SNAPSHOT'
 
 buildscript {

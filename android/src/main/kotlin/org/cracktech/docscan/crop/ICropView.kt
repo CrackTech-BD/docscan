@@ -1,7 +1,7 @@
-package com.zuhabul.docscan.crop
+package org.cracktech.docscan.crop
 
 import android.widget.ImageView
-import com.zuhabul.docscan.view.PaperRectangle
+import org.cracktech.docscan.view.PaperRectangle
 
 
 /**

@@ -1,4 +1,4 @@
-package com.zuhabul.docscan.processor
+package org.cracktech.docscan.processor
 
 import android.graphics.Bitmap
 import android.util.Log

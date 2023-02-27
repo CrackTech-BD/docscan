@@ -1,7 +1,7 @@
-package com.zuhabul.docscan
+package org.cracktech.docscan
 
 
-import com.zuhabul.docscan.processor.Corners
+import org.cracktech.docscan.processor.Corners
 import org.opencv.core.Mat
 
 class SourceManager {
