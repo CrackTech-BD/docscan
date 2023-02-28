@@ -117,6 +117,7 @@ This plugin is based on the work of the following projects: edge_detection, cunn
 ### Maintainer
 
 [Hridoy](https://github.com/hr1d0y)
+[Juwel](https://github.com/juwels1996)
 
 ### Publisher
 
