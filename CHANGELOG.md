@@ -17,3 +17,7 @@
 ## 1.0.4
 
 - Added other architecture support
+
+## 1.0.5
+
+- Added Examples
