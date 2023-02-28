@@ -13,3 +13,7 @@
 ## 1.0.3
 
 - Added x86 support
+
+## 1.0.4
+
+- Added other architecture support
