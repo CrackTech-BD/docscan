@@ -9,3 +9,7 @@
 ## 1.0.2
 
 - Contributor added
+
+## 1.0.3
+
+- Added x86 support
