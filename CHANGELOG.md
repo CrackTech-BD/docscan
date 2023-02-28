@@ -5,3 +5,7 @@
 ## 1.0.1
 
 - Contributor added
+
+## 1.0.2
+
+- Contributor added
