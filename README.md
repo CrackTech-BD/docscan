@@ -1,8 +1,10 @@
 # DocScan
 
-A Flutter plugin that allows users to quickly snap pictures of documents and scan them for easy viewing and storage
+This Flutter plugin allows users to crop and rotate documents with ease. The plugin features a customizable cropping widget that enables users to select a rectangular area of an image and crop it. Additionally, users can rotate the image and apply a scan effect to create a scanned document look. This plugin is suitable for developers looking to add document scanning and cropping functionality to their Flutter applications.
 
 ## Usage
+
+This Flutter plugin can be used to add document scanning and cropping functionality to a wide variety of Flutter applications. For example, it could be used in a document management app to allow users to scan and crop documents before saving them. It could also be used in a finance app to allow users to scan and crop receipts for expense tracking. Additionally, this plugin could be used in a social media app to allow users to crop and rotate photos before sharing them with their friends. Overall, the usage of this plugin is limited only by the developer's imagination and the specific needs of the application.
 
 ### iOS
 
@@ -69,13 +71,10 @@ dependencies:
   path: ^1.8.2 
 ```
 
-### Add the following imports to your Dart code
+### Imports to use
 
 ```dart
 import 'package:docscan/docscan.dart';
-```
-
-```dart
 
 // Check permissions and request its
 bool isCameraGranted = await Permission.camera.request().isGranted;
