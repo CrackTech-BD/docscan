@@ -21,3 +21,7 @@
 ## 1.0.5
 
 - Added Examples
+
+## 1.0.6
+
+- Added x86_64 Support
