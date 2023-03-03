@@ -25,3 +25,7 @@
 ## 1.0.6
 
 - Added x86_64 Support
+
+## 1.0.7
+
+- removed unnecessary files
