@@ -62,40 +62,6 @@ class ScanActivity : BaseActivity(), IScanView.Proxy {
             mPresenter.toggleFlash();
         }
 
-        // val initialBundle = intent.getBundleExtra(EdgeDetectionHandler.INITIAL_BUNDLE) as Bundle;
-        // // NullPointerException here in case directly FROM_GALLERY
-        // if(! initialBundle.containsKey(EdgeDetectionHandler.FROM_GALLERY)){
-        //     this.title = initialBundle.getString(EdgeDetectionHandler.SCAN_TITLE) as String
-        // }
-        // //
-        // gallery.visibility =
-        //     if (initialBundle.getBoolean(EdgeDetectionHandler.CAN_USE_GALLERY, true))
-        //         View.VISIBLE
-        //     else View.GONE;
-
-        // gallery.setOnClickListener {
-        //     pickupFromGallery()
-        // };
-
-        // if (initialBundle.containsKey(EdgeDetectionHandler.FROM_GALLERY) && initialBundle.getBoolean(
-        //         EdgeDetectionHandler.FROM_GALLERY,
-        //         false
-        //     )
-        // ) {
-        //     pickupFromGallery()
-        // }
-    }
-
-    // fun pickupFromGallery() {
-    //     mPresenter.stop()
-    //     val gallery = Intent(
-    //         Intent.ACTION_PICK,
-    //         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI).apply{
-    //         type="image/*"
-    //     }
-    //     ActivityCompat.startActivityForResult(this, gallery, 1, null);
-    // }
-
 
     override fun onStart() {
         super.onStart()

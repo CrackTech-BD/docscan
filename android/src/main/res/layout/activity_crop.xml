@@ -30,42 +30,6 @@
 
     </RelativeLayout>
 
-    <!--<TextView
-        android:id="@+id/crop"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_alignParentEnd="true"
-        android:background="?android:selectableItemBackground"
-        android:gravity="end"
-        android:visibility="gone"
-        android:text="@string/crop" />
-
-    <TextView
-        android:id="@+id/enhance"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_alignParentEnd="true"
-        android:background="?android:selectableItemBackground"
-        android:gravity="end"
-        android:scaleType="centerCrop"
-        android:visibility="gone"
-        android:text="@string/enhance" />
-
-    <ImageButton
-        android:id="@+id/proceed"
-        android:background="@drawable/round_button"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:tint="@color/colorPrimary"
-        app:srcCompat="@drawable/ic_done_black_24dp" />-->
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
