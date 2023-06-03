@@ -29,3 +29,7 @@
 ## 1.0.7
 
 - removed unnecessary files
+
+- ## 1.0.8
+
+- fixed icon color bug

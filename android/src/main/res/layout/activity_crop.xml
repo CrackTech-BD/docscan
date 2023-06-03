@@ -10,10 +10,10 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
 
-    <!-- <RelativeLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"> -->
+        android:layout_centerInParent="true">
 
     <ImageView
         android:id="@+id/paper"
@@ -28,7 +28,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorTransparent" />
 
-    <!-- </RelativeLayout> -->
+    </RelativeLayout>
 
     <!--<TextView
         android:id="@+id/crop"
