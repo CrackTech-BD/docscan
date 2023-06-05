@@ -13,12 +13,10 @@
     
     <item
         android:id="@+id/rotation_image"
-        android:icon="@drawable/ic_rotate"
         android:title="@string/rotate"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_label"
-        android:icon="@drawable/ic_done"
         android:title="@string/done"
         app:showAsAction="always" />
 

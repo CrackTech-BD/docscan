@@ -62,6 +62,11 @@ class ScanActivity : BaseActivity(), IScanView.Proxy {
             mPresenter.toggleFlash();
         }
 
+    
+    }
+
+ 
+
 
     override fun onStart() {
         super.onStart()
