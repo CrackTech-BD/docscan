@@ -39,14 +39,15 @@
         >
 
         <ImageView
-            android:id="@+id/crop"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/round_button"
-            android:padding="12dp"
-            app:srcCompat="@drawable/ic_crop"
-            app:tint="@android:color/white" />
+    android:id="@+id/crop"
+    android:layout_width="60dp"
+    android:layout_height="60dp"
+    android:layout_centerInParent="true"
+    android:background="@drawable/round_button"
+    android:padding="12dp"
+    app:srcCompat="@drawable/ic_tick"
+    app:tint="@android:color/white" />
+
 
     </RelativeLayout>
 
