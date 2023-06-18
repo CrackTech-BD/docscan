@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/gray"
+        android:title="@string/black" />
+
+    <item
+        android:id="@+id/reset"
+        android:title="@string/reset" />
+
+    <item
+        android:id="@+id/rotation_image"
+        android:title="@string/rotate" />
+
+    <item
+        android:id="@+id/action_label"
+        android:title="@string/done" />
+
+</menu>

@@ -118,6 +118,5 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
             return true
         }
 
-        return super.onOptionsItemSelected(item)
-    }
+        return super.onOptionsItemSelected(item)    }
 }
