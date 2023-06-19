@@ -75,6 +75,32 @@ class CropPresenter(
             }
     }
 
+    fun skip(){
+        if (picture == null) {
+            Log.i(TAG, "picture null?")
+            return
+        }
+
+        iCropView.getPaperRect().onCorners2Crop(corners, picture?.size(), picture.width(), picture.height())
+
+        Observable.create<Mat> {
+            it.onNext(cropPicture(picture, iCropView.getPaperRect().getCorners2Crop()))
+        }
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { pc ->
+                Log.i(TAG, "cropped picture: $pc")
+                croppedPicture = pc
+                croppedBitmap =
+                    Bitmap.createBitmap(pc.width(), pc.height(), Bitmap.Config.ARGB_8888)
+                Utils.matToBitmap(pc, croppedBitmap)
+                iCropView.getCroppedPaper().setImageBitmap(croppedBitmap)
+                iCropView.getPaper().visibility = View.GONE
+                iCropView.getPaperRect().visibility = View.GONE
+            }
+
+    }
+
     fun enhance() {
         if (croppedBitmap == null) {
             Log.i(TAG, "picture null?")

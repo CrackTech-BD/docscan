@@ -160,8 +160,6 @@ class ScanActivity : BaseActivity(), IScanView.Proxy {
             imageWidth = exif.getAttributeInt(ExifInterface.TAG_IMAGE_LENGTH, 0).toDouble()
             imageHeight = exif.getAttributeInt(ExifInterface.TAG_IMAGE_WIDTH, 0).toDouble()
         }
-        Log.i(TAG, "width:" + imageWidth)
-        Log.i(TAG, "height:" + imageHeight)
 
         val inputData: ByteArray? = getBytes(contentResolver.openInputStream(imageUri)!!)
         val mat = Mat(Size(imageWidth, imageHeight), CvType.CV_8U)

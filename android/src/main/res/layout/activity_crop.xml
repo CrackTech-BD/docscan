@@ -30,25 +30,54 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/changeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimaryDark"
-        >
+        android:gravity="center"
+        android:padding="15dp">
+
+
+
+        <ImageView
+            android:id="@+id/gray"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="12dp"
+            app:srcCompat="@drawable/ic_invert_colors"
+            android:visibility="visible"
+            app:tint="@android:color/white" />
 
         <ImageView
             android:id="@+id/crop"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/round_button"
             android:padding="12dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_crop"
+            app:tint="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/skip"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="12dp"
+            android:layout_gravity="center"
             app:srcCompat="@drawable/ic_tick"
             app:tint="@android:color/white" />
 
+        <ImageView
+            android:id="@+id/rotate"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="12dp"
+            app:srcCompat="@drawable/ic_rotate"
+            android:visibility="visible"
+            app:tint="@android:color/white" />
 
-    </RelativeLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
