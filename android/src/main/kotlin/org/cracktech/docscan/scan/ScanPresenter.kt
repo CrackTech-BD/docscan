@@ -57,7 +57,7 @@ class ScanPresenter constructor(
     private val proxySchedule: Scheduler
     private var busy: Boolean = false
     private var mCameraLensFacing: String? = null
-    private var flashEnabled: Boolean = true;
+    private var flashEnabled: Boolean = false;
 
     private var mLastClickTime = 0L
     private var shutted: Boolean = true

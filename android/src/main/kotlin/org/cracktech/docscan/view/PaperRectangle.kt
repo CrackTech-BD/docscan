@@ -22,6 +22,8 @@ class PaperRectangle : View {
         defTheme
     )
 
+    private var skipCropButtonClicked = false
+
     private val rectPaint = Paint()
     private val circlePaint = Paint()
     private var ratioX: Double = 1.0
@@ -101,10 +103,10 @@ class PaperRectangle : View {
         }
 
         cropMode = true
-        tl = corners?.corners?.get(0) ?: Point(size.width * 0.1, size.height * 0.1)
-        tr = corners?.corners?.get(1) ?: Point(size.width * 0.9, size.height * 0.1)
-        br = corners?.corners?.get(2) ?: Point(size.width * 0.9, size.height * 0.9)
-        bl = corners?.corners?.get(3) ?: Point(size.width * 0.1, size.height * 0.9)
+        tl = corners?.corners?.get(0) ?: Point(size.width * 0.1, size.height * 0.2)
+        tr = corners?.corners?.get(1) ?: Point(size.width * 0.9, size.height * 0.2)
+        br = corners?.corners?.get(2) ?: Point(size.width * 0.9, size.height * 0.8)
+        bl = corners?.corners?.get(3) ?: Point(size.width * 0.1, size.height * 0.8)
         ratioX = size?.width?.div(paperWidth) ?: 1.0
         ratioY = size?.height?.div(paperHeight) ?: 1.0
         resize()

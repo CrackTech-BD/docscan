@@ -3,14 +3,14 @@
 
     <item
         android:id="@+id/gray"
-        android:title="@string/black" 
+        android:title="@string/black"
         app:showAsAction="always" />
-        
+
     <item
         android:id="@+id/reset"
-        android:title="@string/reset" 
+        android:title="@string/reset"
         app:showAsAction="always" />
-    
+
     <item
         android:id="@+id/rotation_image"
         android:title="@string/rotate"
