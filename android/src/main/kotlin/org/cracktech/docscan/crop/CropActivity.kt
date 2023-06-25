@@ -1,12 +1,14 @@
 package org.cracktech.docscan.crop
+import android.app.Activity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import kotlinx.android.synthetic.main.activity_crop.*
 import org.cracktech.docscan.EdgeDetectionHandler
 import org.cracktech.docscan.R
 import org.cracktech.docscan.base.BaseActivity
 import org.cracktech.docscan.view.PaperRectangle
-import kotlinx.android.synthetic.main.activity_crop.*
 
 
 class CropActivity : BaseActivity(), ICropView.Proxy {
@@ -26,6 +28,8 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
         super.onCreate(savedInstanceState)
 
         //relativeLayout = findViewById(R.id.changeLayout)
+
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true)
 
 
         paper.post {
@@ -65,12 +69,23 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
         findViewById<ImageView>(R.id.rotate).visibility = View.VISIBLE
 
 
+        findViewById<ImageView>(R.id.done).visibility = View.VISIBLE
         findViewById<ImageView>(R.id.gray).setOnClickListener {
             mPresenter.enhance()
         }
 
         findViewById<ImageView>(R.id.rotate).setOnClickListener {
             mPresenter.rotate()
+        }
+
+
+        findViewById<ImageView>(R.id.done).setOnClickListener {
+            //item.setEnabled(false)
+            //
+            mPresenter.save()
+            setResult(Activity.RESULT_OK)
+            System.gc()
+            finish()
         }
     }
 
@@ -145,4 +160,15 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
 //        }
 //
 //        return super.onOptionsItemSelected(item)    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

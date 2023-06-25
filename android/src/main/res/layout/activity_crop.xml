@@ -47,7 +47,7 @@
             android:layout_height="60dp"
             android:padding="12dp"
             app:srcCompat="@drawable/ic_invert_colors"
-            android:visibility="visible"
+            android:visibility="gone"
             app:tint="@android:color/white" />
 
         <ImageView
@@ -68,13 +68,26 @@
             app:srcCompat="@drawable/ic_tick"
             app:tint="@android:color/white" />
 
+
+
+
         <ImageView
             android:id="@+id/rotate"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:padding="12dp"
             app:srcCompat="@drawable/ic_rotate"
-            android:visibility="visible"
+            android:visibility="gone"
+            app:tint="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/done"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="12dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_tick"
+            android:visibility="gone"
             app:tint="@android:color/white" />
 
 

@@ -81,7 +81,7 @@ class CropPresenter(
             return
         }
 
-        iCropView.getPaperRect().onCorners2Crop(corners, picture?.size(), picture.width(), picture.height())
+        iCropView.getPaperRect().onCorners2CropFull(corners, picture?.size(), picture.width(), picture.height())
 
         Observable.create<Mat> {
             it.onNext(cropPicture(picture, iCropView.getPaperRect().getCorners2Crop()))
