@@ -15,18 +15,18 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
 
-    <ImageView
-        android:id="@+id/paper"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY" />
+        <ImageView
+            android:id="@+id/paper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY" />
 
-    <org.cracktech.docscan.view.PaperRectangle
-        android:id="@+id/paper_rect"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorTransparent" />
+        <org.cracktech.docscan.view.PaperRectangle
+            android:id="@+id/paper_rect"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparent" />
 
     </RelativeLayout>
 
@@ -39,57 +39,123 @@
         android:gravity="center"
         android:padding="15dp">
 
-
-
-        <ImageView
+        <LinearLayout
             android:id="@+id/gray"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:padding="12dp"
-            app:srcCompat="@drawable/ic_invert_colors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
             android:visibility="gone"
-            app:tint="@android:color/white" />
+            android:gravity="center">
 
-        <ImageView
+            <ImageView
+
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_invert_colors"
+                app:tint="@android:color/white" />
+
+            <TextView
+                android:id="@+id/gray_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scan" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/crop"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:padding="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_crop"
-            app:tint="@android:color/white" />
+            android:gravity="center">
 
-        <ImageView
+            <ImageView
+
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_crop"
+                app:tint="@android:color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Crop" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/skip"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:padding="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_tick"
-            app:tint="@android:color/white" />
+            android:gravity="center">
 
+            <ImageView
 
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_nocrop"
+                app:tint="@android:color/white" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Skip Crop" />
 
-        <ImageView
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/rotate"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:padding="12dp"
-            app:srcCompat="@drawable/ic_rotate"
-            android:visibility="gone"
-            app:tint="@android:color/white" />
-
-        <ImageView
-            android:id="@+id/done"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:padding="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_tick"
             android:visibility="gone"
-            app:tint="@android:color/white" />
+            android:gravity="center">
 
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_rotate"
+                app:tint="@android:color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rotate" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:gravity="center">
+
+            <ImageView
+
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_tick"
+                app:tint="@android:color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Done" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

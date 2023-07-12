@@ -136,7 +136,7 @@ fun onCorners2CropFull(corners: Corners?, size: Size?, paperWidth: Int, paperHei
     }
 
     cropMode = true
-    tl = Point(0.0, 0.0) 
+    tl = Point(0.0, 0.0)
     tr = Point(size.width, 0.0)
     br = Point(size.width, size.height)
     bl = Point(0.0, size.height)

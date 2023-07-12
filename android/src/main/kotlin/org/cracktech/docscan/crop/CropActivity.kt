@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_crop.*
 import org.cracktech.docscan.EdgeDetectionHandler
 import org.cracktech.docscan.R
@@ -16,6 +18,8 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
     private lateinit var mPresenter: CropPresenter
 
     private lateinit var initialBundle: Bundle;
+
+    private var  isGray:Boolean = false;
 
    // private lateinit var relativeLayout: RelativeLayout;
 
@@ -44,12 +48,12 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
     override fun initPresenter() {
         val initialBundle = intent.getBundleExtra(EdgeDetectionHandler.INITIAL_BUNDLE) as Bundle;
         mPresenter = CropPresenter(this, this, initialBundle)
-        findViewById<ImageView>(R.id.crop).setOnClickListener {
+        findViewById<LinearLayout>(R.id.crop).setOnClickListener {
             mPresenter.crop()
             afterCrop()
         }
 
-        findViewById<ImageView>(R.id.skip).setOnClickListener {
+        findViewById<LinearLayout>(R.id.skip).setOnClickListener {
             mPresenter.skip()
             afterCrop()
         }
@@ -62,24 +66,40 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
 
     fun afterCrop(){
 
-        findViewById<ImageView>(R.id.crop).visibility = View.GONE
-        findViewById<ImageView>(R.id.skip).visibility = View.GONE
+        findViewById<LinearLayout>(R.id.crop).visibility = View.GONE
+        findViewById<LinearLayout>(R.id.skip).visibility = View.GONE
 
-        findViewById<ImageView>(R.id.gray).visibility = View.VISIBLE
-        findViewById<ImageView>(R.id.rotate).visibility = View.VISIBLE
+        findViewById<LinearLayout>(R.id.gray).visibility = View.VISIBLE
+        findViewById<LinearLayout>(R.id.rotate).visibility = View.VISIBLE
 
 
-        findViewById<ImageView>(R.id.done).visibility = View.VISIBLE
-        findViewById<ImageView>(R.id.gray).setOnClickListener {
-            mPresenter.enhance()
+
+
+
+
+        findViewById<LinearLayout>(R.id.done).visibility = View.VISIBLE
+        findViewById<LinearLayout>(R.id.gray).setOnClickListener {
+
+            if(isGray){
+                isGray=false
+                    findViewById<TextView>(R.id.gray_textview).setText("Gray")
+                mPresenter.reset()
+
+            }else{
+                isGray = true;
+                findViewById<TextView>(R.id.gray_textview).setText("Undo")
+
+                mPresenter.enhance()
+            }
+
         }
 
-        findViewById<ImageView>(R.id.rotate).setOnClickListener {
+        findViewById<LinearLayout>(R.id.rotate).setOnClickListener {
             mPresenter.rotate()
         }
 
 
-        findViewById<ImageView>(R.id.done).setOnClickListener {
+        findViewById<LinearLayout>(R.id.done).setOnClickListener {
             //item.setEnabled(false)
             //
             mPresenter.save()
