@@ -46,6 +46,7 @@
             android:orientation="vertical"
             android:layout_gravity="center"
             android:visibility="gone"
+            android:layout_marginEnd="50dp"
             android:gravity="center">
 
             <ImageView
@@ -60,7 +61,8 @@
                 android:id="@+id/gray_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Scan" />
+                android:text="@string/gray"
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 
@@ -70,6 +72,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
+            android:layout_marginEnd="100dp"
             android:gravity="center">
 
             <ImageView
@@ -83,7 +86,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Crop" />
+                android:text="@string/croped"
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 
@@ -106,9 +110,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Skip Crop" />
+                android:text="@string/skip_crop"
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/rotate"
@@ -117,6 +123,7 @@
             android:orientation="vertical"
             android:layout_gravity="center"
             android:visibility="gone"
+            android:layout_marginEnd="50dp"
             android:gravity="center">
 
             <ImageView
@@ -129,7 +136,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rotate" />
+                android:text="@string/rotated"
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 
@@ -153,7 +161,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Done" />
+                android:text="@string/doned"
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 

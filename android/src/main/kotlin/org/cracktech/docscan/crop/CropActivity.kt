@@ -82,7 +82,7 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
 
             if(isGray){
                 isGray=false
-                    findViewById<TextView>(R.id.gray_textview).setText("Gray")
+                    findViewById<TextView>(R.id.gray_textview).setText("Scan")
                 mPresenter.reset()
 
             }else{
