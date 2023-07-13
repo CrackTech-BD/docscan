@@ -13,9 +13,9 @@
     <string name="scan">Scanning</string>
     <string name="next">Next</string>
     <string name="done">Done</string>
-    <string name="gray">Scan</string>
+    <string name="gray">Scan Effect</string>
     <string name="skip_crop">Skip Crop</string>
-    <string name="croped">Crop Selection</string>
+    <string name="croped">Crop and Proceed</string>
     <string name="doned">Done</string>
     <string name="rotated">Rotate</string>
 </resources>

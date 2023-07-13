@@ -82,12 +82,12 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
 
             if(isGray){
                 isGray=false
-                    findViewById<TextView>(R.id.gray_textview).setText("Scan")
+                    findViewById<TextView>(R.id.gray_textview).setText("Scan Effect")
                 mPresenter.reset()
 
             }else{
                 isGray = true;
-                findViewById<TextView>(R.id.gray_textview).setText("Undo")
+                findViewById<TextView>(R.id.gray_textview).setText("Undo Effect")
 
                 mPresenter.enhance()
             }
