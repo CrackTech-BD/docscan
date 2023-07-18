@@ -93,15 +93,12 @@ class ScanPresenter constructor(
         }
         busy = true
         shutted = false
-        Log.i(TAG, "try to focus")
+        Log.i(TAG, "Capture photo directly")
 
-        mCamera?.autoFocus { b, _ ->
-            Log.i(TAG, "focus result: $b")
-            mCamera?.enableShutterSound(false)
-            mCamera?.takePicture(null, null, this)
-        }
-
+        mCamera?.enableShutterSound(false)
+        mCamera?.takePicture(null, null, this)
     }
+
 
     fun toggleFlash() {
         try {
@@ -224,7 +221,7 @@ class ScanPresenter constructor(
 
         mCamera?.parameters = param
         mCamera?.setDisplayOrientation(90)
-        mCamera?.enableShutterSound(false)
+        mCamera?.enableShutterSound(true)
 
     }
 

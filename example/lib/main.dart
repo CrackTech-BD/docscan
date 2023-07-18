@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:docscan/docscan.dart';
 
@@ -40,12 +42,8 @@ class _MyAppState extends State<MyApp> {
       }
     }
     try {
-      //Make sure to await the call to detectEdge.
       List<String>? imgPaths = await DocScan.scanDocument();
       print('success: $imgPaths');
-      // If the widget was removed from the tree while the asynchronous platform
-      // message was in flight, we want to discard the reply rather than calling
-      // setState to update our non-existent appearance.
       if (!mounted) return;
       if (imgPaths == null || imgPaths.isEmpty) {
         return;
@@ -57,12 +55,33 @@ class _MyAppState extends State<MyApp> {
       print(e);
     }
   }
+
+  Future<void> getImageFromGallery() async {
+    String imagePath = join((await getApplicationSupportDirectory()).path,
+        "${(DateTime.now().millisecondsSinceEpoch / 1000).round()}.jpeg");
+
+    try {
+      bool success = await DocScan.detectEdgeFromGallery(
+        imagePath,
+        androidCropTitle: 'Crop',
+        androidCropBlackWhiteTitle: 'Black White',
+        androidCropReset: 'Reset',
+      );
+      print("success: $success");
+    } catch (e) {
+      print(e);
+    }
+    if (!mounted) return;
+
+    setState(() {
+      _imagePath = imagePath;
+    });
+  }
   // ok
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -77,15 +96,32 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Center(
-                child: ElevatedButton(
-                  onPressed: getImageFromCamera,
-                  child: Text('Scan Document'),
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.black,
-                    backgroundColor: Colors.amberAccent,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: getImageFromCamera,
+                      child: Text('Scan Document'),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        backgroundColor: Colors.amberAccent,
+                      ),
+                    ),
                   ),
-                ),
+                  SizedBox(width: 20),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: getImageFromGallery,
+                      child: Text('Gallery'),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        backgroundColor: Colors.amberAccent,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 20),
               Text('Cropped image path:'),
@@ -100,10 +136,11 @@ class _MyAppState extends State<MyApp> {
               Visibility(
                 visible: _imagePath != null,
                 child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.file(
-                      File(_imagePath ?? ''),
-                    )),
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.file(
+                    File(_imagePath ?? ''),
+                  ),
+                ),
               ),
             ],
           ),

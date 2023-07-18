@@ -3,24 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarcrop"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"/>
 
     <ImageView
         android:id="@+id/picture_cropped"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/toolbarcrop"
+        android:layout_above="@id/changeLayout"
+
         android:layout_centerInParent="true" />
 
     <RelativeLayout
+        android:layout_below="@id/toolbarcrop"
+        android:layout_above="@id/changeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/paper"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY" />
+            android:contentDescription="Croped Image" />
 
         <org.cracktech.docscan.view.PaperRectangle
             android:id="@+id/paper_rect"

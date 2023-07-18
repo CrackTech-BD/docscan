@@ -5,19 +5,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+
+        android:layout_height="90dp"/>
+
     <SurfaceView
         android:id="@+id/surface"
+        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+       android:layout_above="@id/relativelayoutfortakepicture"
+        />
 
     <org.cracktech.docscan.view.PaperRectangle
         android:id="@+id/paper_rect"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/colorTransparent" />
 
 
     <RelativeLayout
+        android:id="@+id/relativelayoutfortakepicture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -44,6 +54,17 @@
             android:layout_height="65dp"
             android:layout_centerInParent="true"
             android:background="@drawable/shut_button"
+            app:tint="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/gallery"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/round_button"
+            android:padding="12dp"
+            app:srcCompat="@drawable/ic_menu_gallery"
             app:tint="@android:color/white" />
 
 

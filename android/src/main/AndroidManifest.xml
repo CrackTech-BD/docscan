@@ -8,7 +8,7 @@
         android:name="android.permission.FLASHLIGHT"
         android:permissionGroup="android.permission-group.HARDWARE_CONTROLS"
         android:protectionLevel="normal"
-        android:maxSdkVersion="30"/>
+        android:maxSdkVersion="33"/>
 
     <application
         android:allowBackup="true"

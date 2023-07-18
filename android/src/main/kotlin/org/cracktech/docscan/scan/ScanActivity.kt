@@ -28,6 +28,8 @@ import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream
 
+
+
 class ScanActivity : BaseActivity(), IScanView.Proxy {
 
     private lateinit var mPresenter: ScanPresenter;
@@ -51,21 +53,51 @@ class ScanActivity : BaseActivity(), IScanView.Proxy {
             }
         }
 
-        findViewById<View>(R.id.flash).visibility =
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-                        // to hidde the flashLight button from  SDK versions which we do not handle the permission for!
-                        Build.VERSION.SDK_INT <= Build.VERSION_CODES.R &&
-                        //
-                        baseContext.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)
-                ) View.VISIBLE else View.GONE;
-        findViewById<View>(R.id.flash).setOnClickListener {
-            mPresenter.toggleFlash();
+        val flashButton = findViewById<View>(R.id.flash)
+        flashButton.visibility = View.VISIBLE
+
+// Make the flash button always visible on Android 12
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val window = window
+            window?.let {
+                it.setDecorFitsSystemWindows(false)
+                it.insetsController?.let { controller ->
+                    controller.show(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+                    controller.setSystemBarsBehavior(WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE)
+                }
+            }
         }
 
-    
+        flashButton.setOnClickListener {
+            mPresenter.toggleFlash()
+        }
+        val initialBundle = intent.getBundleExtra(EdgeDetectionHandler.INITIAL_BUNDLE) as Bundle
+
+        if(!initialBundle.containsKey(EdgeDetectionHandler.FROM_GALLERY)){
+            this.title = initialBundle.getString(EdgeDetectionHandler.SCAN_TITLE, "") as String
+        }
+
+        findViewById<View>(R.id.gallery).visibility =
+            if (initialBundle.getBoolean(EdgeDetectionHandler.CAN_USE_GALLERY, true))
+                View.VISIBLE
+            else View.GONE
+
+        findViewById<View>(R.id.gallery).setOnClickListener {
+            pickupFromGallery()
+        }
+
+        if (initialBundle.containsKey(EdgeDetectionHandler.FROM_GALLERY) && initialBundle.getBoolean(EdgeDetectionHandler.FROM_GALLERY,false))
+        {
+            pickupFromGallery()
+        }
     }
 
- 
+    private fun pickupFromGallery() {
+        mPresenter.stop()
+        val gallery = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI).apply{type="image/*"}
+        ActivityCompat.startActivityForResult(this, gallery, 1, null)
+    }
+
 
 
     override fun onStart() {
