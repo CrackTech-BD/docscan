@@ -235,6 +235,8 @@ class ScanPresenter constructor(
         (context as Activity)?.startActivityForResult(cropIntent, REQUEST_CODE);
     }
 
+    
+
     override fun surfaceCreated(p0: SurfaceHolder) {
         initCamera()
     }

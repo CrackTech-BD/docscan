@@ -110,17 +110,17 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: getImageFromGallery,
-                      child: Text('Gallery'),
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.black,
-                        backgroundColor: Colors.amberAccent,
-                      ),
-                    ),
-                  ),
+                  // SizedBox(width: 20),
+                  // Center(
+                  //   child: ElevatedButton(
+                  //     onPressed: getImageFromGallery,
+                  //     child: Text('Gallery'),
+                  //     style: ElevatedButton.styleFrom(
+                  //       foregroundColor: Colors.black,
+                  //       backgroundColor: Colors.amberAccent,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
               SizedBox(height: 20),
@@ -133,12 +133,20 @@ class _MyAppState extends State<MyApp> {
                   style: TextStyle(fontSize: 14),
                 ),
               ),
-              Visibility(
-                visible: _imagePath != null,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.file(
-                    File(_imagePath ?? ''),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0.0),
+                child: Card(
+                  color: Colors.blueGrey,
+                  elevation: 2,
+                  child: Visibility(
+                    visible: _imagePath != null,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.file(
+                        File(_imagePath ?? ''),
+                      ),
+                    ),
                   ),
                 ),
               ),
