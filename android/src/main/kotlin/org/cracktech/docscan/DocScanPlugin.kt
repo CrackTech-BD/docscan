@@ -13,6 +13,7 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
+import android.provider.MediaStore
 
 class DocScanPlugin : FlutterPlugin, ActivityAware {
     private var handler: EdgeDetectionHandler? = null
@@ -44,6 +45,7 @@ class EdgeDetectionHandler : MethodCallHandler, PluginRegistry.ActivityResultLis
     companion object {
         public const val INITIAL_BUNDLE = "initial_bundle"
         public const val FROM_GALLERY = "from_gallery"
+        public const val FROM_DEVICE_CAMERA = "from_device_camera"
         public const val SAVE_TO = "save_to"
         public const val CAN_USE_GALLERY = "can_use_gallery"
         public const val SCAN_TITLE = "scan_title"
@@ -70,9 +72,13 @@ class EdgeDetectionHandler : MethodCallHandler, PluginRegistry.ActivityResultLis
             call.method.equals("edge_detect") -> {
                 openCameraActivity(call, result)
             }
+            call.method.equals("edge_detect_device_camera") -> {
+                openDeviceCameraActivity(call, result)
+            }
             call.method.equals("edge_detect_gallery") -> {
                 openGalleryActivity(call, result)
             }
+
             else -> {
                 result.notImplemented()
             }
@@ -117,6 +123,41 @@ class EdgeDetectionHandler : MethodCallHandler, PluginRegistry.ActivityResultLis
         getActivity()?.startActivityForResult(initialIntent, REQUEST_CODE)
     }
 
+    // ...
+
+    private fun openDeviceCameraActivity(call: MethodCall, result: Result) {
+        if (!setPendingMethodCallAndResult(call, result)) {
+            finishWithAlreadyActiveError()
+            return
+        }
+
+        val initialIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+        val bundle = Bundle()
+        bundle.putString(SAVE_TO, call.argument<String>(SAVE_TO) as String)
+        bundle.putString(CROP_TITLE, call.argument<String>(CROP_TITLE) as String)
+        bundle.putString(
+            CROP_BLACK_WHITE_TITLE,
+            call.argument<String>(CROP_BLACK_WHITE_TITLE) as String
+        )
+        bundle.putString(CROP_RESET_TITLE, call.argument<String>(CROP_RESET_TITLE) as String)
+        bundle.putBoolean(FROM_DEVICE_CAMERA, true)
+        initialIntent.putExtra(INITIAL_BUNDLE, bundle)
+
+        // Launch the camera app
+        val activity = getActivity()
+        activity?.packageManager?.let { pm ->
+            if (initialIntent.resolveActivity(pm) != null) {
+                activity.startActivityForResult(initialIntent, REQUEST_CODE)
+            } else {
+                finishWithError("camera_not_available", "Device camera app is not available.")
+            }
+        } ?: finishWithError("no_activity", "No foreground activity available.")
+    }
+
+// ...
+
+
     private fun openGalleryActivity(call: MethodCall, result: Result) {
         if (!setPendingMethodCallAndResult(call, result)) {
             finishWithAlreadyActiveError()
@@ -136,6 +177,8 @@ class EdgeDetectionHandler : MethodCallHandler, PluginRegistry.ActivityResultLis
         initialIntent.putExtra(INITIAL_BUNDLE, bundle)
         getActivity()?.startActivityForResult(initialIntent, REQUEST_CODE)
     }
+
+
 
     private fun setPendingMethodCallAndResult(
         methodCall: MethodCall,

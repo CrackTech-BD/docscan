@@ -61,12 +61,34 @@ class ScanActivity : BaseActivity(), IScanView.Proxy {
         findViewById<View>(R.id.flash).setOnClickListener {
             mPresenter.toggleFlash();
         }
+        val initialBundle = intent.getBundleExtra(EdgeDetectionHandler.INITIAL_BUNDLE) as Bundle
+
+        if(!initialBundle.containsKey(EdgeDetectionHandler.FROM_GALLERY)){
+            this.title = initialBundle.getString(EdgeDetectionHandler.SCAN_TITLE, "") as String
+        }
+
+        findViewById<View>(R.id.gallery).visibility =
+            if (initialBundle.getBoolean(EdgeDetectionHandler.CAN_USE_GALLERY, true))
+                View.VISIBLE
+            else View.GONE
+
+        findViewById<View>(R.id.gallery).setOnClickListener {
+            pickupFromGallery()
+        }
+
+        if (initialBundle.containsKey(EdgeDetectionHandler.FROM_GALLERY) && initialBundle.getBoolean(EdgeDetectionHandler.FROM_GALLERY,false))
+        {
+            pickupFromGallery()
+        }
 
     
     }
 
- 
-
+    private fun pickupFromGallery() {
+        mPresenter.stop()
+        val gallery = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI).apply{type="image/*"}
+        ActivityCompat.startActivityForResult(this, gallery, 1, null)
+    }
 
     override fun onStart() {
         super.onStart()
@@ -89,6 +111,7 @@ class ScanActivity : BaseActivity(), IScanView.Proxy {
             this.windowManager.defaultDisplay
         }
     }
+
 
     override fun getSurfaceView(): SurfaceView = surface
 
