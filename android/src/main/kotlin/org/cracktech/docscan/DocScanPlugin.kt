@@ -2,8 +2,11 @@ package org.cracktech.docscan
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
-import org.cracktech.docscan.scan.ScanActivity
+import android.os.Environment
+import android.provider.MediaStore
+import android.util.Log
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterPluginBinding
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -13,13 +16,28 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
-import android.provider.MediaStore
+import org.cracktech.docscan.crop.CropActivity
+import org.cracktech.docscan.processor.processPicture
+import org.cracktech.docscan.scan.ScanActivity
+import org.opencv.android.OpenCVLoader
+import org.opencv.android.Utils
+import org.opencv.core.Mat
+import org.opencv.imgproc.Imgproc
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Date
+
 
 class DocScanPlugin : FlutterPlugin, ActivityAware {
     private var handler: EdgeDetectionHandler? = null
 
+
+
     override fun onAttachedToEngine(binding: FlutterPluginBinding) {
         handler = EdgeDetectionHandler()
+
+        if (!OpenCVLoader.initDebug()) {
+        }
         val channel = MethodChannel(
             binding.binaryMessenger, "scan_document"
         )
@@ -41,6 +59,8 @@ class EdgeDetectionHandler : MethodCallHandler, PluginRegistry.ActivityResultLis
     private var activityPluginBinding: ActivityPluginBinding? = null
     private var result: Result? = null
     private var methodCall: MethodCall? = null
+
+    lateinit var currentPhotoPath: String
 
     companion object {
         public const val INITIAL_BUNDLE = "initial_bundle"
@@ -97,6 +117,40 @@ class EdgeDetectionHandler : MethodCallHandler, PluginRegistry.ActivityResultLis
                 finishWithSuccess(false)
             }
             return true
+        }else if(requestCode == 102){
+            if (resultCode == Activity.RESULT_OK) {
+                var bitmap =  data?.extras?.get("data") as Bitmap
+
+                val pic = Mat()
+                Utils.bitmapToMat(bitmap, pic)
+
+                val bundle = Bundle();
+
+                bundle.putString(SAVE_TO, "")
+                bundle.putString(CROP_TITLE, "Crop")
+                bundle.putString(
+                    CROP_BLACK_WHITE_TITLE,
+                    "Crop Black"
+                )
+                bundle.putString(CROP_RESET_TITLE, "Reset")
+                bundle.putBoolean(FROM_GALLERY, true)
+
+                SourceManager.corners = processPicture(pic)
+                //Imgproc.cvtColor(pic, pic, Imgproc.COLOR_RGB2BGRA)
+                SourceManager.pic = pic
+
+                val cropIntent = Intent(getActivity()?.applicationContext, CropActivity::class.java);
+                cropIntent.putExtra(EdgeDetectionHandler.INITIAL_BUNDLE, bundle)
+                getActivity()?.startActivity(cropIntent)
+
+
+                //inishWithSuccess(true)
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                //finishWithSuccess(false)
+            }
+            return true
+
+
         }
         return false
     }
@@ -123,9 +177,14 @@ class EdgeDetectionHandler : MethodCallHandler, PluginRegistry.ActivityResultLis
         getActivity()?.startActivityForResult(initialIntent, REQUEST_CODE)
     }
 
+
+
+
     // ...
 
     private fun openDeviceCameraActivity(call: MethodCall, result: Result) {
+
+
         if (!setPendingMethodCallAndResult(call, result)) {
             finishWithAlreadyActiveError()
             return
@@ -133,27 +192,54 @@ class EdgeDetectionHandler : MethodCallHandler, PluginRegistry.ActivityResultLis
 
         val initialIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-        val bundle = Bundle()
-        bundle.putString(SAVE_TO, call.argument<String>(SAVE_TO) as String)
-        bundle.putString(CROP_TITLE, call.argument<String>(CROP_TITLE) as String)
-        bundle.putString(
-            CROP_BLACK_WHITE_TITLE,
-            call.argument<String>(CROP_BLACK_WHITE_TITLE) as String
-        )
-        bundle.putString(CROP_RESET_TITLE, call.argument<String>(CROP_RESET_TITLE) as String)
-        bundle.putBoolean(FROM_DEVICE_CAMERA, true)
-        initialIntent.putExtra(INITIAL_BUNDLE, bundle)
+
 
         // Launch the camera app
         val activity = getActivity()
         activity?.packageManager?.let { pm ->
             if (initialIntent.resolveActivity(pm) != null) {
-                activity.startActivityForResult(initialIntent, REQUEST_CODE)
+
+                activity.startActivityForResult(initialIntent, 102)
             } else {
                 finishWithError("camera_not_available", "Device camera app is not available.")
             }
         } ?: finishWithError("no_activity", "No foreground activity available.")
     }
+
+
+    private fun createImageFile(): File? {
+        // Create an image file name
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val imageFileName = "JPEG_" + timeStamp + "_"
+        val storageDir = Environment.getExternalStoragePublicDirectory(
+            Environment.DIRECTORY_PICTURES
+        )
+        val image = File.createTempFile(
+            imageFileName,  // prefix
+            ".jpg",  // suffix
+            storageDir // directory
+        )
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = "file:" + image.absolutePath
+        return image
+    }
+
+
+
+//    private fun createImageFile(): File {
+//        // Create an image file name
+//        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+//        val storageDir: File? = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+//        return File.createTempFile(
+//            "JPEG_${timeStamp}_", /* prefix */
+//            ".jpg", /* suffix */
+//            storageDir /* directory */
+//        ).apply {
+//            // Save a file: path for use with ACTION_VIEW intents
+//            currentPhotoPath = absolutePath
+//        }
+//    }
 
 // ...
 

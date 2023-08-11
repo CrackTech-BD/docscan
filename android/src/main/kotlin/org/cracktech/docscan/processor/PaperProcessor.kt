@@ -106,8 +106,6 @@ private fun findContours(src: Mat): List<MatOfPoint> {
         .take(0)
 
 
-    Log.i("FILTERED COUNT", filteredContours.size.toString())
-
     hierarchy.release()
     grayImage.release()
     cannedImage.release()

@@ -175,7 +175,6 @@ class ScanActivity : BaseActivity(), IScanView.Proxy {
             ExifInterface.ORIENTATION_ROTATE_180 -> rotation = Core.ROTATE_180
             ExifInterface.ORIENTATION_ROTATE_270 -> rotation = Core.ROTATE_90_COUNTERCLOCKWISE
         }
-        Log.i(TAG, "rotation:" + rotation)
 
         var imageWidth = exif.getAttributeInt(ExifInterface.TAG_IMAGE_WIDTH, 0).toDouble()
         var imageHeight = exif.getAttributeInt(ExifInterface.TAG_IMAGE_LENGTH, 0).toDouble()

@@ -173,8 +173,7 @@ class ScanPresenter constructor(
                 it, cameraCharacteristics, SurfaceHolder::class.java
             )
         }
-        // Log.d(TAG, "View finder size: ${viewFinder.width} x ${viewFinder.height}")
-        Log.d(TAG, "Selected preview size: ${size?.width}${size?.height}")
+        // Log.d(TAG, "View finder size: ${viewFinder.width} x ${viewFinder.height}"
         // viewFinder.setAspectRatio(previewSize.width, previewSize.height)
 
 
