@@ -152,26 +152,27 @@ fun onCorners2CropFull(corners: Corners?, size: Size?, paperWidth: Int, paperHei
         return listOf(tl, tr, br, bl)
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
         rectPaint.color = Color.WHITE
         rectPaint.strokeWidth = 6F
         rectPaint.style = Paint.Style.STROKE
-        canvas?.drawPath(path, rectPaint)
+        canvas.drawPath(path, rectPaint)
 
         rectPaint.color = Color.argb(128, 255, 255, 255)
         rectPaint.strokeWidth = 0F
         rectPaint.style = Paint.Style.FILL
-        canvas?.drawPath(path, rectPaint)
+        canvas.drawPath(path, rectPaint)
 
         if (cropMode) {
-            canvas?.drawCircle(tl.x.toFloat(), tl.y.toFloat(), 20F, circlePaint)
-            canvas?.drawCircle(tr.x.toFloat(), tr.y.toFloat(), 20F, circlePaint)
-            canvas?.drawCircle(bl.x.toFloat(), bl.y.toFloat(), 20F, circlePaint)
-            canvas?.drawCircle(br.x.toFloat(), br.y.toFloat(), 20F, circlePaint)
+            canvas.drawCircle(tl.x.toFloat(), tl.y.toFloat(), 20F, circlePaint)
+            canvas.drawCircle(tr.x.toFloat(), tr.y.toFloat(), 20F, circlePaint)
+            canvas.drawCircle(bl.x.toFloat(), bl.y.toFloat(), 20F, circlePaint)
+            canvas.drawCircle(br.x.toFloat(), br.y.toFloat(), 20F, circlePaint)
         }
     }
+
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
