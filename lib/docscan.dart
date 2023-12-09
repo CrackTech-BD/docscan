@@ -6,7 +6,7 @@ class DocScan {
   static const MethodChannel _channel = const MethodChannel('edge_detection');
 
   /// Call this method to scan the object edge in live camera.
-  static Future<bool> detectEdge(
+  static Future<bool> scanDocument(
     String saveTo, {
     bool canUseGallery = true,
     String androidScanTitle = "Scanning",
