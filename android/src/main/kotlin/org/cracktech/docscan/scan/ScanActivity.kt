@@ -3,30 +3,27 @@ package org.cracktech.docscan.scan
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.media.ExifInterface
+import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.exifinterface.media.ExifInterface
 import org.cracktech.docscan.EdgeDetectionHandler
 import org.cracktech.docscan.R
 import org.cracktech.docscan.REQUEST_CODE
 import org.cracktech.docscan.base.BaseActivity
 import org.cracktech.docscan.view.PaperRectangle
-import kotlinx.android.synthetic.main.activity_scan.*
 import org.opencv.android.OpenCVLoader
 import org.opencv.core.Core
 import org.opencv.core.CvType
 import org.opencv.core.Mat
 import org.opencv.core.Size
 import org.opencv.imgcodecs.Imgcodecs
-import java.io.ByteArrayOutputStream
-import java.io.IOException
-import java.io.InputStream
+import java.io.*
 
 class ScanActivity : BaseActivity(), IScanView.Proxy {
 
@@ -45,7 +42,7 @@ class ScanActivity : BaseActivity(), IScanView.Proxy {
             finish()
         }
 
-        shut.setOnClickListener {
+        findViewById<View>(R.id.shut).setOnClickListener {
             if (mPresenter.canShut) {
                 mPresenter.shut()
             }
@@ -90,10 +87,9 @@ class ScanActivity : BaseActivity(), IScanView.Proxy {
         }
     }
 
-    override fun getSurfaceView(): SurfaceView = surface
+    override fun getSurfaceView() = findViewById<SurfaceView>(R.id.surface)
 
-    override fun getPaperRect(): PaperRectangle = paper_rect
-
+    override fun getPaperRect() = findViewById<PaperRectangle>(R.id.paper_rect)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 

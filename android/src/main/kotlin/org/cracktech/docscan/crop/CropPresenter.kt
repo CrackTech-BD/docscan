@@ -1,6 +1,5 @@
 package org.cracktech.docscan.crop
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.os.Bundle
@@ -24,7 +23,6 @@ import java.io.FileOutputStream
 const val IMAGES_DIR = "smart_scanner"
 
 class CropPresenter(
-    private val context: Context,
     private val iCropView: ICropView.Proxy,
     private val initialBundle: Bundle
 ) {
@@ -75,32 +73,6 @@ class CropPresenter(
             }
     }
 
-    fun skip(){
-        if (picture == null) {
-            Log.i(TAG, "picture null?")
-            return
-        }
-
-        iCropView.getPaperRect().onCorners2CropFull(corners, picture?.size(), picture.width(), picture.height())
-
-        Observable.create<Mat> {
-            it.onNext(cropPicture(picture, iCropView.getPaperRect().getCorners2Crop()))
-        }
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { pc ->
-                Log.i(TAG, "cropped picture: $pc")
-                croppedPicture = pc
-                croppedBitmap =
-                    Bitmap.createBitmap(pc.width(), pc.height(), Bitmap.Config.ARGB_8888)
-                Utils.matToBitmap(pc, croppedBitmap)
-                iCropView.getCroppedPaper().setImageBitmap(croppedBitmap)
-                iCropView.getPaper().visibility = View.GONE
-                iCropView.getPaperRect().visibility = View.GONE
-            }
-
-    }
-
     fun enhance() {
         if (croppedBitmap == null) {
             Log.i(TAG, "picture null?")
@@ -138,9 +110,6 @@ class CropPresenter(
             Log.i(TAG, "picture null?")
             return
         }
-
-        //croppedBitmap = croppedBitmap?.rotateInt(rotateBitmapDegree)
-
         rotateBitmap = croppedBitmap
         enhancedPicture = croppedBitmap
 
@@ -163,11 +132,9 @@ class CropPresenter(
             rotateBitmap = croppedBitmap
         }
 
-        Log.i(TAG, "ROTATEBITMAPDEGREE --> $rotateBitmapDegree")
+        Log.i(TAG, "ROTATE BITMAP DEGREE --> $rotateBitmapDegree")
 
         rotateBitmap = rotateBitmap?.rotateInt(rotateBitmapDegree)
-
-        //rotateBitmap = rotateBitmap?.rotateFloat(rotateBitmapDegree.toFloat())
 
         iCropView.getCroppedPaper().setImageBitmap(rotateBitmap)
 
@@ -176,7 +143,7 @@ class CropPresenter(
     }
 
     fun save() {
-        val file = File(initialBundle.getString(EdgeDetectionHandler.SAVE_TO) as String);
+        val file = File(initialBundle.getString(EdgeDetectionHandler.SAVE_TO) as String)
 
         val rotatePic = rotateBitmap
         if (null != rotatePic) {
@@ -187,7 +154,7 @@ class CropPresenter(
             rotatePic.recycle()
             Log.i(TAG, "RotateBitmap Saved")
         } else {
-            //first save enhanced picture, if picture is not enhanced, save cropped picture, otherwise nothing to do
+            // first save enhanced picture, if picture is not enhanced, save cropped picture, otherwise nothing to do
             val pic = enhancedPicture
 
             if (null != pic) {
@@ -209,11 +176,6 @@ class CropPresenter(
                 }
             }
         }
-    }
-
-    fun Bitmap.rotateFloat(degrees: Float): Bitmap {
-        val matrix = Matrix().apply { postRotate(degrees) }
-        return Bitmap.createBitmap(this, 0, 0, width, height, matrix, true)
     }
 
     // Extension function to rotate a bitmap
