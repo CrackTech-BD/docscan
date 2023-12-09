@@ -45,16 +45,16 @@
             android:background="@drawable/shut_button"
             app:tint="@android:color/white" />
 
-        <ImageView
-            android:id="@+id/gallery"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/round_button"
-            android:padding="12dp"
-            app:srcCompat="@drawable/ic_menu_gallery"
-            app:tint="@android:color/white" />
+<!--        <ImageView-->
+<!--            android:id="@+id/gallery"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:background="@drawable/round_button"-->
+<!--            android:padding="12dp"-->
+<!--            app:srcCompat="@drawable/ic_menu_gallery"-->
+<!--            app:tint="@android:color/white" />-->
 
     </RelativeLayout>
 

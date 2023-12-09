@@ -178,7 +178,7 @@ class _MyAppState extends State<MyApp> {
           centerTitle: true,
           backgroundColor: Colors.amberAccent,
           title: const Text(
-            'DocScan',
+            'DocScan New',
             style: TextStyle(color: Colors.black),
           ),
         ),
