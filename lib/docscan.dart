@@ -3,14 +3,9 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 class DocScan {
-  static const MethodChannel _channel = const MethodChannel('edge_detection');
+  static const MethodChannel _channel = const MethodChannel('scan_document');
 
   /// Call this method to scan the object edge in live camera.
-  static bool canUseGallery = false;
-  static String androidScanTitle = "Scanning";
-  static String androidCropTitle = "Crop";
-  static String androidCropBlackWhiteTitle = "Black White";
-
   static Future<bool> scanDocument(
     String saveTo, {
     bool canUseGallery = true,
@@ -29,19 +24,19 @@ class DocScan {
     });
   }
 
-  /// Call this method to scan the object edge from a gallery image.
-  static Future<bool> detectEdgeFromGallery(
-    String saveTo, {
-    String androidCropTitle = "Crop",
-    String androidCropBlackWhiteTitle = "Black White",
-    String androidCropReset = "Reset",
-  }) async {
-    return await _channel.invokeMethod('edge_detect_gallery', {
-      'save_to': saveTo,
-      'crop_title': androidCropTitle,
-      'crop_black_white_title': androidCropBlackWhiteTitle,
-      'crop_reset_title': androidCropReset,
-      'from_gallery': true,
-    });
-  }
+  // /// Call this method to scan the object edge from a gallery image.
+  // static Future<bool> detectEdgeFromGallery(
+  //   String saveTo, {
+  //   String androidCropTitle = "Crop",
+  //   String androidCropBlackWhiteTitle = "Black White",
+  //   String androidCropReset = "Reset",
+  // }) async {
+  //   return await _channel.invokeMethod('edge_detect_gallery', {
+  //     'save_to': saveTo,
+  //     'crop_title': androidCropTitle,
+  //     'crop_black_white_title': androidCropBlackWhiteTitle,
+  //     'crop_reset_title': androidCropReset,
+  //     'from_gallery': true,
+  //   });
+  // }
 }

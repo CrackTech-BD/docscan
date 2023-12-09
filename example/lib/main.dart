@@ -68,37 +68,6 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  Future<void> getImageFromGallery() async {
-    // Generate filepath for saving
-    String imagePath = join((await getApplicationSupportDirectory()).path,
-        "${(DateTime.now().millisecondsSinceEpoch / 1000).round()}.jpeg");
-
-    bool success = false;
-    try {
-      //Make sure to await the call to detectEdgeFromGallery.
-      success = await DocScan.detectEdgeFromGallery(
-        imagePath,
-        androidCropTitle: 'Crop', // use custom localizations for android
-        androidCropBlackWhiteTitle: 'Black White',
-        androidCropReset: 'Reset',
-      );
-      print("success: $success");
-    } catch (e) {
-      print(e);
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      if (success) {
-        _imagePath = imagePath;
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -115,13 +84,6 @@ class _MyAppState extends State<MyApp> {
                 child: ElevatedButton(
                   onPressed: getImageFromCamera,
                   child: Text('Scan'),
-                ),
-              ),
-              SizedBox(height: 20),
-              Center(
-                child: ElevatedButton(
-                  onPressed: getImageFromGallery,
-                  child: Text('Upload'),
                 ),
               ),
               SizedBox(height: 20),

@@ -20,7 +20,7 @@ class DocScanPlugin : FlutterPlugin, ActivityAware {
     override fun onAttachedToEngine(binding: FlutterPluginBinding) {
         handler = EdgeDetectionHandler()
         val channel = MethodChannel(
-            binding.binaryMessenger, "edge_detection"
+            binding.binaryMessenger, "scan_document"
         )
         channel.setMethodCallHandler(handler)
     }
@@ -62,7 +62,7 @@ class EdgeDetectionHandler : MethodCallHandler, PluginRegistry.ActivityResultLis
             getActivity() == null -> {
                 result.error(
                     "no_activity",
-                    "edge_detection plugin requires a foreground activity.",
+                    "scan_document plugin requires a foreground activity.",
                     null
                 )
                 return
