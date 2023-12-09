@@ -114,7 +114,6 @@ class PaperRectangle : View {
     }
 
 
-
 //    fun onCorners2CropFull(corners: Corners?, size: Size?, paperWidth: Int, paperHeight: Int) {
 //        if (size == null) {
 //            return
@@ -145,7 +144,6 @@ fun onCorners2CropFull(corners: Corners?, size: Size?, paperWidth: Int, paperHei
     resize()
     movePoints()
 }
-
 
     fun getCorners2Crop(): List<Point> {
         reverseSize()
@@ -201,6 +199,8 @@ fun onCorners2CropFull(corners: Corners?, size: Size?, paperWidth: Int, paperHei
             ?: tl
     }
 
+
+   
     private fun movePoints() {
         path.reset()
         path.moveTo(tl.x.toFloat(), tl.y.toFloat())
