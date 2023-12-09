@@ -37,6 +37,9 @@ android {
         targetSdkVersion 31
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
