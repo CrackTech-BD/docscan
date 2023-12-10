@@ -9,20 +9,7 @@ import kotlin.math.max
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-import org.opencv.core.CvType
-import org.opencv.core.Mat
-import org.opencv.core.Scalar
-import org.opencv.core.Core
-import org.opencv.core.MatOfFloat
-import org.opencv.core.MatOfInt
-import org.opencv.core.Point
-import org.opencv.core.CvType.CV_64F
-
-
 const val TAG: String = "PaperProcessor"
-
-const val COLOR_RGBA2Lab = Imgproc.COLOR_RGBA2RGB + Imgproc.COLOR_RGB2Lab
-const val COLOR_Lab2RGBA = Imgproc.COLOR_Lab2RGB + Imgproc.COLOR_RGB2RGBA
 
 fun processPicture(previewFrame: Mat): Corners? {
     val contours = findContours(previewFrame)
@@ -85,34 +72,62 @@ fun enhancePicture(src: Bitmap?): Bitmap {
     srcMat.release()
     return result
 }
+
 fun mattEnhancePicture(src: Bitmap?): Bitmap {
-    val srcMat = Mat()
-    Utils.bitmapToMat(src, srcMat)
+    try {
+        val srcMat = Mat()
+        Utils.bitmapToMat(src, srcMat)
 
-    // Convert to Lab color space
-    Imgproc.cvtColor(srcMat, srcMat, COLOR_RGBA2Lab)
+        // Unsharp masking for texture enhancement
+        val blurredMat = Mat()
+        Imgproc.GaussianBlur(srcMat, blurredMat, Size(0.0, 0.0), 3.0)
+        Core.addWeighted(srcMat, 1.5, blurredMat, -0.5, 0.0, srcMat)
 
-    // Sharpen the L channel
-    val kernel = Mat(3, 3, CvType.CV_64F)
-    kernel.put(1, 1, -1.0)
-    Imgproc.filter2D(srcMat, srcMat, CV_64F, kernel)
+        // Contrast adjustment
+        val alpha = 1.2 // Adjust for desired contrast effect
+        val beta = 0.1 // Adjust for desired brightness effect
+        srcMat.convertTo(srcMat, -1, alpha, beta)
 
-    // Reduce saturation for a matte finish
-    val scale = 0.75 // adjust for the desired effect
-    val labChannels = ArrayList<Mat>()
-    Core.split(srcMat, labChannels)
-    Core.multiply(labChannels[1], Mat(srcMat.size(), CvType.CV_64F, Scalar(scale)), labChannels[1])
-    Core.multiply(labChannels[2], Mat(srcMat.size(), CvType.CV_64F, Scalar(scale)), labChannels[2])
-    Core.merge(labChannels, srcMat)
+        // Convert back to Bitmap
+        val result = Bitmap.createBitmap(src?.width ?: 1080, src?.height ?: 1920, Bitmap.Config.RGB_565)
+        Utils.matToBitmap(srcMat, result)
 
-    // Convert back to RGBA
-    Imgproc.cvtColor(srcMat, srcMat, COLOR_Lab2RGBA)
+        srcMat.release()
+        blurredMat.release()
 
-    val result = Bitmap.createBitmap(src?.width ?: 1080, src?.height ?: 1920, Bitmap.Config.RGB_565)
-    Utils.matToBitmap(srcMat, result, true)
-    srcMat.release()
-    return result
+        return result
+    } catch (e: Exception) {
+        Log.e(TAG, "Error in mattEnhancePicture: ${e.message}")
+        e.printStackTrace()
+        throw e  // Rethrow the exception to crash the app for debugging
+    }
 }
+
+
+
+private fun dehaze(inputMat: Mat): Mat {
+    val hsvMat = Mat()
+    Imgproc.cvtColor(inputMat, hsvMat, Imgproc.COLOR_RGB2HSV)
+
+    // Increase contrast by adjusting the V channel
+    val vChannels = ArrayList<Mat>()
+    Core.split(hsvMat, vChannels)
+    Core.normalize(vChannels[2], vChannels[2], 0.0, 255.0, Core.NORM_MINMAX)
+    Imgproc.equalizeHist(vChannels[2], vChannels[2])
+    Core.merge(vChannels, hsvMat)
+
+    // Convert back to RGB
+    Imgproc.cvtColor(hsvMat, hsvMat, Imgproc.COLOR_HSV2RGB)
+
+    // Adjust brightness and contrast
+    val alpha = 1.2 // Adjust for desired effect
+    val beta = 10.0 // Adjust for desired effect
+    Core.addWeighted(hsvMat, alpha, Mat.ones(hsvMat.size(), CvType.CV_8UC3), beta, 0.0, hsvMat)
+
+    return hsvMat
+}
+
+
 
 
 
