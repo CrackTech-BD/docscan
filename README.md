@@ -48,7 +48,7 @@ The plugin code is written in kotlin 1.5.31 so the same has to be set to the and
 Change the kotlin_version to 1.5.31 in your `android/build.gradle` file.
 
 ```gradle
-ext.kotlin_version = '1.5.31'
+ext.kotlin_version = '1.8.0'
 ```
 
 Change the minimum Android SDK version to 21 (or higher) in your `android/app/build.gradle` file.
