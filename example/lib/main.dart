@@ -242,71 +242,24 @@ class _MyAppState extends State<MyApp> {
                 children: [
                   ElevatedButton(
                     onPressed: getImageFromCamera,
-                    child: Text('Scan Document'),
+                    child: Text(
+                      'Scan Document',
+                    ),
                     style: ElevatedButton.styleFrom(
+                      fixedSize: Size(150, 150),
+                      elevation: 2,
                       foregroundColor: Colors.black,
                       backgroundColor: Colors.amberAccent,
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  ElevatedButton(
-                    onPressed: captureImageFromDeviceCamera,
-                    child: Text('Camera'),
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.amberAccent,
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  ElevatedButton(
-                    onPressed: getImageFromGallery,
-                    child: Text('Gallery'),
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.amberAccent,
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Visibility(
-                    visible: _imagePath != null,
-                    child: Visibility(
-                      visible: !_isImageSaved,
-                      child: ElevatedButton(
-                        onPressed: saveImageToGallery,
-                        child: Text('Save Image'),
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.black,
-                          backgroundColor: Colors.amberAccent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
                         ),
                       ),
                     ),
                   ),
-                  Visibility(
-                    visible: _isImageSaved,
-                    child: ElevatedButton(
-                      onPressed: discardImage,
-                      child: Text('Delete Image'),
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.black,
-                        backgroundColor: Colors.amberAccent,
-                      ),
-                    ),
-                  )
+                  SizedBox(width: 10),
                 ],
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: getImageFromDeviceCamera,
-                    child: Text('Hybrid'),
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.amberAccent,
-                    ),
-                  ),
-                ],
-              )
             ],
           ),
         ),
