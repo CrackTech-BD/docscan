@@ -58,117 +58,6 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  Future<void> captureImageFromDeviceCamera() async {
-    if (Platform.isAndroid) {
-      PermissionStatus status = await Permission.camera.request();
-      if (status.isPermanentlyDenied) {
-        openAppSettings();
-      }
-      bool isCameraGranted = await Permission.camera.request().isGranted;
-      print('isCameraGranted: $isCameraGranted');
-      if (!isCameraGranted) {
-        isCameraGranted =
-            await Permission.camera.request() == PermissionStatus.granted;
-      }
-      if (!isCameraGranted) {
-        return;
-      }
-    }
-
-    try {
-      final imageFile =
-          await ImagePicker().pickImage(source: ImageSource.camera);
-      if (imageFile == null) {
-        return;
-      }
-      setState(() {
-        _imagePath = imageFile.path;
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<void> getImageFromGallery() async {
-    String imagePath = join((await getApplicationSupportDirectory()).path,
-        "${(DateTime.now().millisecondsSinceEpoch / 1000).round()}.jpeg");
-
-    try {
-      bool success = await DocScan.detectEdgeFromGallery(
-        imagePath,
-        androidCropTitle: 'Crop',
-        androidCropBlackWhiteTitle: 'Black White',
-        androidCropReset: 'Reset',
-      );
-      print("success: $success");
-    } catch (e) {
-      print(e);
-    }
-    if (!mounted) return;
-
-    setState(() {
-      _imagePath = imagePath;
-    });
-  }
-
-  Future<void> saveImageToGallery() async {
-    if (_imagePath == null) {
-      return;
-    }
-
-    try {
-      final result = await ImageGallerySaver.saveFile(_imagePath!);
-      if (result['isSuccess']) {
-        setState(() {
-          _isImageSaved = true;
-        });
-        Fluttertoast.showToast(msg: 'Image saved to gallery');
-      } else {
-        Fluttertoast.showToast(msg: 'Failed to save image to gallery');
-      }
-    } catch (e) {
-      print(e);
-      Fluttertoast.showToast(msg: 'An error occurred while saving the image');
-    }
-  }
-
-  void discardImage() {
-    setState(() {
-      _imagePath = null;
-
-      _isImageSaved = false;
-    });
-  }
-
-  Future<void> getImageFromDeviceCamera() async {
-    String imagePath = join(
-      (await getApplicationSupportDirectory()).path,
-      "${(DateTime.now().millisecondsSinceEpoch / 1000).round()}.jpeg",
-    );
-
-    try {
-      bool success = await DocScan.detectEdgeFromDeviceCamera(
-        imagePath,
-        androidCropTitle: 'Crop',
-        androidCropBlackWhiteTitle: 'Black White',
-        androidCropReset: 'Reset',
-      );
-
-      print("success: $success");
-
-      if (success) {
-        setState(() {
-          _imagePath = imagePath;
-        });
-      } else {}
-    } catch (e) {
-      print(e);
-    }
-    if (!mounted) return;
-  }
-
-  // ok
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -178,7 +67,7 @@ class _MyAppState extends State<MyApp> {
           centerTitle: true,
           backgroundColor: Colors.amberAccent,
           title: const Text(
-            'DocScan New',
+            'DocScan',
             style: TextStyle(color: Colors.black),
           ),
         ),
@@ -214,25 +103,11 @@ class _MyAppState extends State<MyApp> {
                 ),
                 child: Visibility(
                   visible: _imagePath != null,
-                  child: Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Image.file(
-                          File(_imagePath ?? ''),
-                        ),
-                      ),
-                      Positioned(
-                          top: 10,
-                          right: 10,
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.close,
-                              color: Colors.black,
-                            ),
-                            onPressed: discardImage,
-                          ))
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.file(
+                      File(_imagePath ?? ''),
+                    ),
                   ),
                 ),
               ),

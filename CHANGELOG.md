@@ -41,3 +41,7 @@
 - ## 1.1.1
   
 - updated cunning scanner
+  
+- ## 1.1.2
+  
+- added color effect for android, and disabled autofocus
