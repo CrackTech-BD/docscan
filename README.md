@@ -107,7 +107,7 @@ try {
 
 ### Acknowledgements
 
-This plugin is based on the work of the following projects: edge_detection, cunning_document_scanner
+This plugin is based on the work of the following projects: scan_document, cunning_document_scanner
 
 ### Author
 

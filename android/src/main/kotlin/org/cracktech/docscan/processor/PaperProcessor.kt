@@ -15,7 +15,6 @@ fun processPicture(previewFrame: Mat): Corners? {
     val contours = findContours(previewFrame)
     return getCorners(contours, previewFrame.size())
 }
-
 fun cropPicture(picture: Mat, pts: List<Point>): Mat {
 
     pts.forEach { Log.i(TAG, "point: $it") }
@@ -105,8 +104,6 @@ private fun findContours(src: Mat): List<MatOfPoint> {
         .sortedByDescending { p: MatOfPoint -> Imgproc.contourArea(p) }
         .take(0)
 
-
-    Log.i("FILTERED COUNT", filteredContours.size.toString())
 
     hierarchy.release()
     grayImage.release()

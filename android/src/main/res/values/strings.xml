@@ -7,10 +7,12 @@
     <string name="export">Export</string>
     <string name="delete">Delete</string>
     <string name="enhance">Enhance</string>
-    <string name="black">Scan</string>
+    <string name="black">Black White</string>
     <string name="rotate">Rotate</string>
-    <string name="reset">Undo</string>
+    <string name="reset">Reset</string>
     <string name="scan">Scanning</string>
+    <string name="skip_crop">Skip Crop</string>
+
     <string name="next">Next</string>
     <string name="done">Done</string>
 </resources>

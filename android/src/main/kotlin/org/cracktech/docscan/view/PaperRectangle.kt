@@ -113,6 +113,38 @@ class PaperRectangle : View {
         movePoints()
     }
 
+
+//    fun onCorners2CropFull(corners: Corners?, size: Size?, paperWidth: Int, paperHeight: Int) {
+//        if (size == null) {
+//            return
+//        }
+//
+//        cropMode = true
+//        tl = corners?.corners?.get(0) ?: Point(size.width * 0.0, size.height * 0.0)
+//        tr = corners?.corners?.get(1) ?: Point(size.width * 0.0, size.height * 0.0)
+//        br = corners?.corners?.get(2) ?: Point(size.width * 0.0, size.height * 0.0)
+//        bl = corners?.corners?.get(3) ?: Point(size.width * 0.0, size.height * 0.0)
+//        ratioX = size?.width?.div(paperWidth) ?: 1.0
+//        ratioY = size?.height?.div(paperHeight) ?: 1.0
+//        resize()
+//        movePoints()
+//    }
+fun onCorners2CropFull(corners: Corners?, size: Size?, paperWidth: Int, paperHeight: Int) {
+    if (size == null) {
+        return
+    }
+
+    cropMode = true
+    tl = Point(0.0, 0.0)
+    tr = Point(size.width, 0.0)
+    br = Point(size.width, size.height)
+    bl = Point(0.0, size.height)
+    ratioX = size.width.div(paperWidth)
+    ratioY = size.height.div(paperHeight)
+    resize()
+    movePoints()
+}
+
     fun getCorners2Crop(): List<Point> {
         reverseSize()
         return listOf(tl, tr, br, bl)
@@ -167,6 +199,8 @@ class PaperRectangle : View {
             ?: tl
     }
 
+
+   
     private fun movePoints() {
         path.reset()
         path.moveTo(tl.x.toFloat(), tl.y.toFloat())
