@@ -37,3 +37,7 @@
 - ## 1.1.0
 
 - updated kotlin version
+
+- ## 1.1.1
+  
+- updated cunning scanner

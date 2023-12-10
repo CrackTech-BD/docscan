@@ -24,6 +24,8 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
 
     private var  isGray:Boolean = false;
 
+    private var  isMatt:Boolean = false;
+
     override fun prepare() {
         this.initialBundle = intent.getBundleExtra(EdgeDetectionHandler.INITIAL_BUNDLE) as Bundle
         this.title = initialBundle.getString(EdgeDetectionHandler.CROP_TITLE)
@@ -62,6 +64,7 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
 
         findViewById<LinearLayout>(R.id.gray).visibility = View.VISIBLE
         findViewById<LinearLayout>(R.id.rotate).visibility = View.VISIBLE
+        findViewById<LinearLayout>(R.id.matt).visibility = View.VISIBLE
 
 
 
@@ -81,6 +84,23 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
                 findViewById<TextView>(R.id.gray_textview).setText("Undo Effect")
 
                 mPresenter.enhance()
+            }
+
+        }
+
+
+        findViewById<LinearLayout>(R.id.matt).setOnClickListener {
+
+            if(isMatt){
+                isMatt=false
+                findViewById<TextView>(R.id.matt_textview).setText("Color Effect")
+                mPresenter.reset()
+
+            }else{
+                isMatt = true;
+                findViewById<TextView>(R.id.matt_textview).setText("Undo Effect")
+
+                mPresenter.mattEnhance()
             }
 
         }

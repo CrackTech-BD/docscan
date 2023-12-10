@@ -73,6 +73,64 @@ fun enhancePicture(src: Bitmap?): Bitmap {
     return result
 }
 
+fun mattEnhancePicture(src: Bitmap?): Bitmap {
+    try {
+        val srcMat = Mat()
+        Utils.bitmapToMat(src, srcMat)
+
+        // Unsharp masking for texture enhancement
+        val blurredMat = Mat()
+        Imgproc.GaussianBlur(srcMat, blurredMat, Size(0.0, 0.0), 3.0)
+        Core.addWeighted(srcMat, 1.5, blurredMat, -0.5, 0.0, srcMat)
+
+        // Contrast adjustment
+        val alpha = 1.2 // Adjust for desired contrast effect
+        val beta = 0.1 // Adjust for desired brightness effect
+        srcMat.convertTo(srcMat, -1, alpha, beta)
+
+        // Convert back to Bitmap
+        val result = Bitmap.createBitmap(src?.width ?: 1080, src?.height ?: 1920, Bitmap.Config.RGB_565)
+        Utils.matToBitmap(srcMat, result)
+
+        srcMat.release()
+        blurredMat.release()
+
+        return result
+    } catch (e: Exception) {
+        Log.e(TAG, "Error in mattEnhancePicture: ${e.message}")
+        e.printStackTrace()
+        throw e  // Rethrow the exception to crash the app for debugging
+    }
+}
+
+
+
+private fun dehaze(inputMat: Mat): Mat {
+    val hsvMat = Mat()
+    Imgproc.cvtColor(inputMat, hsvMat, Imgproc.COLOR_RGB2HSV)
+
+    // Increase contrast by adjusting the V channel
+    val vChannels = ArrayList<Mat>()
+    Core.split(hsvMat, vChannels)
+    Core.normalize(vChannels[2], vChannels[2], 0.0, 255.0, Core.NORM_MINMAX)
+    Imgproc.equalizeHist(vChannels[2], vChannels[2])
+    Core.merge(vChannels, hsvMat)
+
+    // Convert back to RGB
+    Imgproc.cvtColor(hsvMat, hsvMat, Imgproc.COLOR_HSV2RGB)
+
+    // Adjust brightness and contrast
+    val alpha = 1.2 // Adjust for desired effect
+    val beta = 10.0 // Adjust for desired effect
+    Core.addWeighted(hsvMat, alpha, Mat.ones(hsvMat.size(), CvType.CV_8UC3), beta, 0.0, hsvMat)
+
+    return hsvMat
+}
+
+
+
+
+
 private fun findContours(src: Mat): List<MatOfPoint> {
 
     val grayImage: Mat
