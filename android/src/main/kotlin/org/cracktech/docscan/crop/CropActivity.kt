@@ -93,7 +93,7 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
 
             if(isMatt){
                 isMatt=false
-                findViewById<TextView>(R.id.matt_textview).setText("Matt Effect")
+                findViewById<TextView>(R.id.matt_textview).setText("Color Effect")
                 mPresenter.reset()
 
             }else{

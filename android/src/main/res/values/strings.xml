@@ -12,7 +12,7 @@
     <string name="reset">Reset</string>
     <string name="scan">Scan Effect</string>
     <string name="skip_crop">Skip Crop</string>
-    <string name="matt">Matt Effect</string>
+    <string name="matt">Color Effect</string>
 
     <string name="next">Next</string>
     <string name="done">Done</string>
