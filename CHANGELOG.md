@@ -33,3 +33,7 @@
 - ## 1.0.8
 
 - fixed icon color bug
+
+- ## 1.1.0
+
+- updated kotlin version
