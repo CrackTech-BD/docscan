@@ -12,15 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-  permission_handler: any
-  path_provider: ^2.0.11
-  path: ^1.8.2
   docscan:
     path: ../
   cupertino_icons: ^1.0.2
-  image_gallery_saver: ^2.0.3
-  fluttertoast: ^8.2.2
-  image_picker: ^1.0.4
 
 dev_dependencies:
   flutter_test:
