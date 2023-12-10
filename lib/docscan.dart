@@ -10,7 +10,7 @@ class DocScan {
   static const MethodChannel _channel = const MethodChannel('scan_document');
 
   static bool canUseGallery = true;
-  static String androidScanTitle = "Scanning";
+  static String androidScanTitle = "Scan";
   static String androidCropTitle = "Crop";
   static String androidCropBlackWhiteTitle = "Scan";
   static String androidCropReset = "Undo";

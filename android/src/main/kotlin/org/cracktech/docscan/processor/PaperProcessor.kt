@@ -9,7 +9,20 @@ import kotlin.math.max
 import kotlin.math.pow
 import kotlin.math.sqrt
 
+import org.opencv.core.CvType
+import org.opencv.core.Mat
+import org.opencv.core.Scalar
+import org.opencv.core.Core
+import org.opencv.core.MatOfFloat
+import org.opencv.core.MatOfInt
+import org.opencv.core.Point
+import org.opencv.core.CvType.CV_64F
+
+
 const val TAG: String = "PaperProcessor"
+
+const val COLOR_RGBA2Lab = Imgproc.COLOR_RGBA2RGB + Imgproc.COLOR_RGB2Lab
+const val COLOR_Lab2RGBA = Imgproc.COLOR_Lab2RGB + Imgproc.COLOR_RGB2RGBA
 
 fun processPicture(previewFrame: Mat): Corners? {
     val contours = findContours(previewFrame)
@@ -72,6 +85,36 @@ fun enhancePicture(src: Bitmap?): Bitmap {
     srcMat.release()
     return result
 }
+fun mattEnhancePicture(src: Bitmap?): Bitmap {
+    val srcMat = Mat()
+    Utils.bitmapToMat(src, srcMat)
+
+    // Convert to Lab color space
+    Imgproc.cvtColor(srcMat, srcMat, COLOR_RGBA2Lab)
+
+    // Sharpen the L channel
+    val kernel = Mat(3, 3, CvType.CV_64F)
+    kernel.put(1, 1, -1.0)
+    Imgproc.filter2D(srcMat, srcMat, CV_64F, kernel)
+
+    // Reduce saturation for a matte finish
+    val scale = 0.75 // adjust for the desired effect
+    val labChannels = ArrayList<Mat>()
+    Core.split(srcMat, labChannels)
+    Core.multiply(labChannels[1], Mat(srcMat.size(), CvType.CV_64F, Scalar(scale)), labChannels[1])
+    Core.multiply(labChannels[2], Mat(srcMat.size(), CvType.CV_64F, Scalar(scale)), labChannels[2])
+    Core.merge(labChannels, srcMat)
+
+    // Convert back to RGBA
+    Imgproc.cvtColor(srcMat, srcMat, COLOR_Lab2RGBA)
+
+    val result = Bitmap.createBitmap(src?.width ?: 1080, src?.height ?: 1920, Bitmap.Config.RGB_565)
+    Utils.matToBitmap(srcMat, result, true)
+    srcMat.release()
+    return result
+}
+
+
 
 private fun findContours(src: Mat): List<MatOfPoint> {
 

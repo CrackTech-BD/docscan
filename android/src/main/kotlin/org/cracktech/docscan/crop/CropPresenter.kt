@@ -15,6 +15,8 @@ import org.cracktech.docscan.processor.enhancePicture
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import org.cracktech.docscan.processor.mattEnhancePicture
+//import org.cracktech.docscan.processor.mattEnhancePicture
 import org.opencv.android.Utils
 import org.opencv.core.Mat
 import java.io.File
@@ -121,6 +123,38 @@ class CropPresenter(
 
         Observable.create<Bitmap> {
             it.onNext(enhancePicture(imgToEnhance))
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { pc ->
+
+                enhancedPicture = pc
+                rotateBitmap = enhancedPicture
+
+                iCropView.getCroppedPaper().setImageBitmap(pc)
+            }
+    }
+
+    fun mattEnhance() {
+        if (croppedBitmap == null) {
+            Log.i(TAG, "picture null?")
+            return
+        }
+
+        val imgToMattEnhance: Bitmap? = when {
+            enhancedPicture != null -> {
+                enhancedPicture
+            }
+            rotateBitmap != null -> {
+                rotateBitmap
+            }
+            else -> {
+                croppedBitmap
+            }
+        }
+
+        Observable.create<Bitmap> {
+            it.onNext(mattEnhancePicture(imgToMattEnhance))
         }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
