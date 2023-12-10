@@ -30,18 +30,22 @@
 
 - removed unnecessary files
 
-- ## 1.0.8
+## 1.0.8
 
 - fixed icon color bug
 
-- ## 1.1.0
+## 1.1.0
 
 - updated kotlin version
 
-- ## 1.1.1
+## 1.1.1
   
 - updated cunning scanner
   
-- ## 1.1.2
+## 1.1.2
   
 - added color effect for android, and disabled autofocus
+
+## 1.1.3
+  
+- removed unneccesary package 
