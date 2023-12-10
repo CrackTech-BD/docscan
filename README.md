@@ -65,10 +65,9 @@ Please check the latest version before installation.
 dependencies:
   flutter:
     sdk: flutter
-  docscan: ^1.0.0
   path_provider: ^2.0.13
-  permission_handler: ^10.2.0
-  path: ^1.8.2 
+  permission_handler: ^11.1.0
+  path: ^1.8.2
 ```
 
 ### Imports to use
