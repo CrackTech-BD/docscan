@@ -49,3 +49,7 @@
 ## 1.1.3
   
 - removed unneccesary package 
+  
+## 1.1.4
+  
+- autofocus added, and overflor done button 

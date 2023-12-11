@@ -211,18 +211,18 @@ class ScanPresenter constructor(
         } else {
             param?.setPictureSize(pictureSize.width, pictureSize.height)
         }
-//        val pm = context.packageManager
-//        if (pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS) && mCamera!!.parameters.supportedFocusModes.contains(
-//                Camera.Parameters.FOCUS_MODE_FIXED
-//            )
-//        ) {
-//            param?.focusMode = Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE
-//            Log.d(TAG, "enabling autofocus")
-//        } else {
-//            Log.d(TAG, "autofocus not available")
-//        }
-        param?.focusMode = Camera.Parameters.FOCUS_MODE_FIXED
-        Log.d(TAG, "Setting focus mode to FOCUS_MODE_CONTINUOUS_PICTURE")
+       val pm = context.packageManager
+       if (pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS) && mCamera!!.parameters.supportedFocusModes.contains(
+               Camera.Parameters.FOCUS_MODE_FIXED
+           )
+       ) {
+           param?.focusMode = Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE
+           Log.d(TAG, "enabling autofocus")
+       } else {
+           Log.d(TAG, "autofocus not available")
+       }
+        // param?.focusMode = Camera.Parameters.FOCUS_MODE_FIXED
+        // Log.d(TAG, "Setting focus mode to FOCUS_MODE_CONTINUOUS_PICTURE")
         param?.flashMode = Camera.Parameters.FLASH_MODE_OFF
 
         mCamera?.parameters = param

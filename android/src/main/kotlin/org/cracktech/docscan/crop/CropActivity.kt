@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import org.cracktech.docscan.EdgeDetectionHandler
 import org.cracktech.docscan.R
 import org.cracktech.docscan.base.BaseActivity
@@ -16,15 +17,15 @@ import org.cracktech.docscan.view.PaperRectangle
 
 class CropActivity : BaseActivity(), ICropView.Proxy {
 
-    private var showMenuItems = false
-
     private lateinit var mPresenter: CropPresenter
 
     private lateinit var initialBundle: Bundle
 
-    private var  isGray:Boolean = false;
+    private var  isGray:Boolean = false
 
-    private var  isMatt:Boolean = false;
+    private var isProcessing:Boolean = false
+
+    //private var  isMatt:Boolean = false;
 
     override fun prepare() {
         this.initialBundle = intent.getBundleExtra(EdgeDetectionHandler.INITIAL_BUNDLE) as Bundle
@@ -43,7 +44,7 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
 
 
     override fun initPresenter() {
-        val initialBundle = intent.getBundleExtra(EdgeDetectionHandler.INITIAL_BUNDLE) as Bundle;
+        val initialBundle = intent.getBundleExtra(EdgeDetectionHandler.INITIAL_BUNDLE) as Bundle
         mPresenter = CropPresenter(this,this, initialBundle)
         findViewById<LinearLayout>(R.id.crop).setOnClickListener {
 
@@ -64,7 +65,7 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
 
         findViewById<LinearLayout>(R.id.gray).visibility = View.VISIBLE
         findViewById<LinearLayout>(R.id.rotate).visibility = View.VISIBLE
-        findViewById<LinearLayout>(R.id.matt).visibility = View.VISIBLE
+//        findViewById<LinearLayout>(R.id.matt).visibility = View.VISIBLE
 
 
 
@@ -72,51 +73,75 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
 
 
         findViewById<LinearLayout>(R.id.done).visibility = View.VISIBLE
+
+
         findViewById<LinearLayout>(R.id.gray).setOnClickListener {
+            if(!isProcessing){
 
-            if(isGray){
-                isGray=false
-                findViewById<TextView>(R.id.gray_textview).setText("Scan Effect")
-                mPresenter.reset()
+                isProcessing = true
+                if(isGray){
+                    isGray=false
+                    findViewById<TextView>(R.id.gray_textview).text = "Scan Effect"
+                    mPresenter.reset()
 
-            }else{
-                isGray = true;
-                findViewById<TextView>(R.id.gray_textview).setText("Undo Effect")
+                }else{
+                    isGray = true
+                    findViewById<TextView>(R.id.gray_textview).text = "Undo Effect"
 
-                mPresenter.enhance()
+                    mPresenter.enhance()
+                }
+                isProcessing = false
             }
+
+
 
         }
 
 
-        findViewById<LinearLayout>(R.id.matt).setOnClickListener {
-
-            if(isMatt){
-                isMatt=false
-                findViewById<TextView>(R.id.matt_textview).setText("Color Effect")
-                mPresenter.reset()
-
-            }else{
-                isMatt = true;
-                findViewById<TextView>(R.id.matt_textview).setText("Undo Effect")
-
-                mPresenter.mattEnhance()
-            }
-
-        }
+//        findViewById<LinearLayout>(R.id.matt).setOnClickListener {
+//
+//            if(isMatt){
+//                isMatt=false
+//                findViewById<TextView>(R.id.matt_textview).setText("Color Effect")
+//                mPresenter.reset()
+//
+//            }else{
+//                isMatt = true;
+//                findViewById<TextView>(R.id.matt_textview).setText("Undo Effect")
+//
+//                mPresenter.mattEnhance()
+//            }
+//
+//        }
 
         findViewById<LinearLayout>(R.id.rotate).setOnClickListener {
-            mPresenter.rotate()
+
+
+            if(!isProcessing){
+                
+                isProcessing = true
+                mPresenter.rotate()
+
+                isProcessing = false
+            }
         }
 
 
         findViewById<LinearLayout>(R.id.done).setOnClickListener {
             //item.setEnabled(false)
+
             //
-            mPresenter.save()
-            setResult(Activity.RESULT_OK)
-            System.gc()
-            finish()
+            if(!isProcessing){
+
+                isProcessing = true
+
+                mPresenter.save()
+                setResult(Activity.RESULT_OK)
+                System.gc()
+                isProcessing = false
+                finish()
+            }
+
         }
     }
 
@@ -157,7 +182,7 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
 
     // handle button activities
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.getItemId()) {
+        when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()
                 return true
