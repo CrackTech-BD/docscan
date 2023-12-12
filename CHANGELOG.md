@@ -53,3 +53,7 @@
 ## 1.1.4
   
 - autofocus added, and overflor done button 
+  
+## 1.1.5
+  
+- removed colored effect and fixed button layout bug 

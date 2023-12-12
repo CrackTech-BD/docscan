@@ -118,7 +118,7 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
 
 
             if(!isProcessing){
-                
+
                 isProcessing = true
                 mPresenter.rotate()
 
