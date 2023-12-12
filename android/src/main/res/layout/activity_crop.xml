@@ -46,7 +46,7 @@
             android:orientation="vertical"
             android:layout_gravity="center"
             android:visibility="gone"
-            android:layout_marginEnd="50dp"
+            android:layout_marginEnd="15dp"
             android:gravity="center">
 
             <ImageView
@@ -65,32 +65,32 @@
                 android:textColor="@android:color/white" />
 
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/matt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            android:layout_marginEnd="50dp"
-            android:gravity="center">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/matt"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:visibility="gone"-->
+<!--            android:layout_marginEnd="15dp"-->
+<!--            android:gravity="center">-->
 
-            <ImageView
+<!--            <ImageView-->
 
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:padding="12dp"
-                app:srcCompat="@drawable/ic_invert_colors"
-                app:tint="@android:color/white" />
+<!--                android:layout_width="60dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:padding="12dp"-->
+<!--                app:srcCompat="@drawable/baseline_format_color_fill_24"-->
+<!--                app:tint="@android:color/white" />-->
 
-            <TextView
-                android:id="@+id/matt_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/matt"
-                android:textColor="@android:color/holo_orange_dark" />
+<!--            <TextView-->
+<!--                android:id="@+id/matt_textview"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/matt"-->
+<!--                android:textColor="@android:color/holo_orange_dark" />-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
         <LinearLayout
             android:id="@+id/crop"
@@ -123,6 +123,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
+            android:layout_marginEnd="15dp"
             android:gravity="center">
 
             <ImageView
@@ -149,7 +150,7 @@
             android:orientation="vertical"
             android:layout_gravity="center"
             android:visibility="gone"
-            android:layout_marginEnd="50dp"
+            android:layout_marginEnd="20dp"
             android:gravity="center">
 
             <ImageView
@@ -162,6 +163,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/rotate_textview"
                 android:text="@string/rotate"
                 android:textColor="@android:color/white" />
 
@@ -173,6 +175,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
             android:visibility="gone"
             android:gravity="center">
 
